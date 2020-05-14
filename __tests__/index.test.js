@@ -1,9 +1,21 @@
-const request = require('supertest')
-const express = require('express')
+const supertest = require("supertest")
 
-const app = express()
+const server = require("../index")
 
 
-test("Placeholder Test", () => {
-    expect(2 + 2).toBe(4)
+test("GET /", async () => {
+    // Start by ARRANGing the test data needed
+    const endpoint = "/"
+    const status = 200
+
+    // Then we ACT on what we're testing
+    const res = await supertest(server).get(endpoint)
+
+    // Then ASSERT the res data
+    expect(res.statusCode).toBe(status)
+
+    //**** res.type is shorthand for res.headers["content-type"] ****//
+    expect(res.type).toBe("application/json")
+    expect(res.body.message).toBe("Welcome to our API")
+
 })
