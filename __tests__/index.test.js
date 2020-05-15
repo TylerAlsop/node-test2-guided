@@ -17,5 +17,9 @@ test("GET /", async () => {
     //**** res.type is shorthand for res.headers["content-type"] ****//
     expect(res.type).toBe("application/json")
     expect(res.body.message).toBe("Welcome to our API")
+    //**** A more general way to test the welcome message would be like this: ****//
+    expect(res.body.message).toMatch(/welcome/i)
+
+
 
 })
